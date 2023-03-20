@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Availability</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+      .block {
+        width: 300px;
+        height: 300px;
+        display: inline-block;
+        margin-right: 10px;
+        background-color: blue;
+      }
+      .red {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="block" id="block1">
+      <img class="img11" src="" alt="">
+    </div>
+    <div class="block" id="block2">
+      <img class="img11" src="" alt="">
+    </div>
+    <div class="block" id="block3">
+      <img class="img11" src="" alt="">
+    </div>
+    <script>
+      const socket = new WebSocket('ws://localhost:3000');
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log(data);
+
+        var block1 = document.getElementById(`block1`);
+        var block2 = document.getElementById(`block2`);
+        var block3 = document.getElementById(`block3`);
+        var img1 = block1.querySelector('img');
+        var img2 = block2.querySelector('img');
+        var img3 = block3.querySelector('img');
+
+
+        if(data[0]){
+          img1.src = './public/parkedd.png';
+        } else {
+          img1.src = './public/not.jpg';  
+        }
+
+        if(data[1]){
+          img2.src = './public/parkedd.png';
+        } else {
+          img2.src = './public/not.jpg';
+        }
+
+        if(data[2]){
+          img3.src = './public/parkedd.png';
+        } else {
+          img3.src = './public/not.jpg';
+        }
+
+        // update browser display with availability data
+        /*data.forEach((doc) => {
+          //console.log(doc.Available);
+          if (doc.Available) {
+            document.getElementById(`block${doc.Slot_Id}`).classList.add('red');
+          } else {
+            document.getElementById(`block${doc.Slot_Id}`).classList.remove('red');
+          }
+        });*/
+      };
+    </script>
+  </body>
+</html>
