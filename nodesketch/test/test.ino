@@ -9,7 +9,7 @@ const char* password = "12345678";
 //#define TRIGGER_PIN_2 3
 //#define ECHO_PIN_2 5
 
-int x = 0;
+int x = 1;
 
 void setup() {
   Serial.begin(115200);
@@ -28,29 +28,29 @@ void setup() {
 }
 
 void loop() {
-  long duration_1, duration_2;
+  /*long duration_1, duration_2;
   float distance_1, distance_2;
   static unsigned long start_time = 0;
   static unsigned long end_time = 0;
-  static unsigned long total_time;
+  static unsigned long total_time;*/
 
   // Measure distance from the first ultrasonic sensor
-  digitalWrite(TRIGGER_PIN_1, LOW);
+  /*digitalWrite(TRIGGER_PIN_1, LOW);
   delayMicroseconds(1000);
   digitalWrite(TRIGGER_PIN_1, HIGH);
   delayMicroseconds(1000);
   digitalWrite(TRIGGER_PIN_1, LOW);
   duration_1 = pulseIn(ECHO_PIN_1, HIGH);
-  distance_1 = duration_1 * 0.034 / 2;
+  distance_1 = duration_1 * 0.034 / 2;*/
 
-  Serial.print("distance_1 = " );
-  Serial.println(distance_1);
+  //Serial.print("distance_1 = " );
+  //Serial.println(distance_1);
 
-  if(distance_1 < 10){
+  /*if(distance_1 < 10){
     x = 1;
   }else{
     x = 0;
-  }
+  }*/
   
   WiFiClient client;
   HTTPClient http;

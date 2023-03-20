@@ -19,13 +19,17 @@
   </head>
   <body>
     <div class="block" id="block1">
-      <img class="img11" src="" alt="">
+      <img id="b1" class="img11" src="" alt="">
+      <label id="lab1" for="b1">Label1</label>
+      
     </div>
     <div class="block" id="block2">
-      <img class="img11" src="" alt="">
+      <img id="b2" class="img11" src="" alt="">
+      <label id="lab2" for="b2">Label2</label>
     </div>
     <div class="block" id="block3">
       <img class="img11" src="" alt="">
+      <label id="lab3" for="b3">Label3</label>
     </div>
     <script>
       const socket = new WebSocket('ws://localhost:3000');
@@ -42,22 +46,29 @@
         var img3 = block3.querySelector('img');
 
 
-        if(data[0]){
+        if(data[0][0]){
           img1.src = './public/parkedd.png';
+          document.getElementById('lab1').textContent = "Vehicle Parked";
         } else {
-          img1.src = './public/not.jpg';  
+          img1.src = './public/not.jpg'; 
+          document.getElementById('lab2').textContent = data[1][0];
+          
         }
 
-        if(data[1]){
+        if(data[0][1]){
           img2.src = './public/parkedd.png';
+          document.getElementById('lab2').textContent = "Vehicle Parked";
         } else {
           img2.src = './public/not.jpg';
+          document.getElementById('lab2').textContent = data[1][1];
         }
 
-        if(data[2]){
+        if(data[0][2]){
           img3.src = './public/parkedd.png';
+          document.getElementById('lab3').textContent = "Vehicle Parked";
         } else {
           img3.src = './public/not.jpg';
+          document.getElementById('lab2').textContent = data[1][2];
         }
 
         // update browser display with availability data
