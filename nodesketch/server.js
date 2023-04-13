@@ -8,7 +8,6 @@ const port = 4000;
 
 var refPara1 = 0, refPara2 = 0, refPara3 = 0;
 var timeStamp = 0;
-const date = new Date(); // create a new date object
 var hours;
 var minutes;
 var seconds;
@@ -52,16 +51,18 @@ app.post('/api/data', (req, res) => {
   const para3 = req.body.slot3;*/
 
   const para1 = req.body.distance;
+  console.log('diastance = '+para1);
+  const date = new Date(); // create a new date object
   hours = date.getHours(); // get the current hour (0-23)
   minutes = date.getMinutes(); // get the current minute (0-59)
   seconds = date.getSeconds(); // get the current second (0-59)
   timeStamp = hours+':'+minutes+':'+seconds;
-  console.log('time = '+timeStamp);
+  //console.log('time = '+timeStamp);
 
 //-------------------------slot 1 -----------------------------------------------------------------
 
-  if(refPara1 == 0 && para1 == 1){
-
+  if(refPara1 == 0 && para1 == 1){ // A new car was parked
+    console.log('time = '+timeStamp);
     slotCollection.findOneAndUpdate(
     { Slot_Id: 1 },
     {$set : {Available: para1, Time:timeStamp, EndTime:"NULL"}},
@@ -72,7 +73,7 @@ app.post('/api/data', (req, res) => {
 
     refPara1 = 1;
   }
-  else if(refPara == 1 && para1 == 0){
+  else if(refPara1 == 1 && para1 == 0){
     slotCollection.findOneAndUpdate(
     { Slot_Id: 1 },
     {$set : {Available: para1, EndTime:timeStamp}},
@@ -83,6 +84,7 @@ app.post('/api/data', (req, res) => {
     refPara1 = 0;
   }
 //-------------------------slot 2 -----------------------------------------------------------------
+/*
   if(refPara2 == 0 && para2 == 1){
 
     slotCollection.findOneAndUpdate(
@@ -130,7 +132,7 @@ else if(refPara3 == 1 && para3 == 0){
   refPara3 = 0;
 }
   
-
+*/
   
 
   /*slotCollection.findOneAndUpdate(
@@ -150,7 +152,7 @@ else if(refPara3 == 1 && para3 == 0){
   .then((updatedDocument) => console.log('Document updated successfully', updatedDocument))
   .catch((error) => console.log('Error updating document', error));*/
 
-  console.log(`Distance: ${para1}`)
+  //console.log(`Distance: ${para1}`)
   //console.log(`Param2:e ap ${para2}`);
 
   //res.send("HelloS");
